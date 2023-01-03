@@ -17,7 +17,10 @@
           <p>标题：{{photoObj.title}}</p>
           <p>宽高：{{photoObj.width}} X {{photoObj.height}}</p>
           <p>作者：{{photoObj.author}}({{photoObj.author_uid}})</p>
-          <p>标签：<el-tag size="mini" v-for="item in photoObj.tags" style="margin-right: .05rem;">{{item}}</el-tag></p>
+          <p>标签：<el-tag size="mini"
+                        v-for="(item, index) in photoObj.tags"
+                        :key="`test${index}`"
+                        style="margin-right: .05rem;">{{item}}</el-tag></p>
           <p>图片网址：<el-link :href="photoObj.page">{{photoObj.page}}</el-link></p>
           <p>图片地址：<el-link :href="photoObj.url">{{photoObj.url}}</el-link></p>
         </div>
@@ -41,8 +44,10 @@ export default {
   name: 'Home',
   data() {
     return {
-
     }
+  },
+  mounted() {
+    this.randomPhotoObj();
   },
   computed: {
     ...mapState('user', ['curUser', 'theme']),
