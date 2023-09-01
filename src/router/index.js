@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/Home'
 import Module from '@/views/Module'
+import PdfPreview from "../views/PdfPreview";
 
 Vue.use(Router)
 
@@ -26,6 +27,12 @@ const router = new Router({
       name: "Module",
       component: Module,
       desc: 'Vuex模块化，Vuex-persistencestate持久化，secure-ls加密处理'
+    },
+    {
+      path: '/pdf-preview',
+      name: "PdfPreview",
+      component: PdfPreview,
+      desc: 'vue-pdf预览pdf文件流'
     },
   ]
 });
