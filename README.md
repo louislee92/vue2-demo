@@ -1,13 +1,10 @@
-# vue-module-persistedstate
-Vuex模块化和持久化示例项目
+# vue-module
+vue模块示例项目，主要功能有
+- vuex模块化
+- vuex-persistedstate持久化session数据到本地
+- secure-ls数据加密处理
 
-> Node版本：v10.14.2
+
+
+Node版本：v10.14.2
 Npm版本：6.4.1
-package.json依赖的插件版本如下：
-“vue”: “^2.2.37”,
-“vue-router”: “^3.0.1”,
-“vuex”: “^3.0”,
-“vuex-persistedstate”: “^4.1.0”
-“secure-ls”: “^1.2.6”,
-
-CSDN博客：[https://blog.csdn.net/louislee92/article/details/128538364](https://blog.csdn.net/louislee92/article/details/128538364)
