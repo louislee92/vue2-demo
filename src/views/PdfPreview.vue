@@ -1,9 +1,25 @@
 <template>
-  <div class="wrapper">
-    <el-button>上一页</el-button>
-    <el-button>下一页</el-button>
-
-    <pdf src=""></pdf>
+  <div class="wrapper" id="container">
+    <div class="buttons">
+      <p>{{currentPage}} / {{totalPage}}</p>
+      <p><el-button @click="changePdfPage('first')" round icon="el-icon-caret-top"></el-button></p>
+      <p><el-button @click="changePdfPage('pre')" round icon="el-icon-arrow-up"></el-button></p>
+      <p><el-button @click="changePdfPage('next')" round icon="el-icon-arrow-down"></el-button></p>
+      <p><el-button @click="changePdfPage('last')" round icon="el-icon-caret-bottom"></el-button></p>
+    </div>
+    <pdf :src="src" v-show="loadedRatio==1" style="width: 50%;margin: auto;border: 1px solid grey;"
+         :page="currentPage"
+         @num-pages="totalPage=$event"
+         @progress="loadedRatio=$event"
+         @page-loaded="currentPage=$event"
+         @loaded="loadPdfHandler"
+         @link-clicked="currentPage=$event"
+    ></pdf>
+    <div class="progress" v-show="loadedRatio!=1">
+      <el-progress type="circle" :width="70" color="#53a7ff"
+                   :percentage="Math.floor(loadedRatio * 100)"></el-progress>
+      <br><span>正在加载中，请稍候...</span>
+    </div>
   </div>
 </template>
 
@@ -15,6 +31,10 @@ export default {
   components: {pdf},
   data() {
     return {
+      src: "http://xstx.fun/vue-module/src/assets/file/Java-Top10.pdf",
+      currentPage: 1,
+      totalPage: 0,
+      loadedRatio: 0,
     }
   },
   mounted() {
@@ -22,6 +42,30 @@ export default {
   computed: {
   },
   methods: {
+    loadPdfHandler(e) {
+      console.log("loadPdfHandler", e)
+    },
+    changePdfPage(str) {
+      if('first' == str)  {
+        this.currentPage = 1;
+        this.toTop()
+      }
+      if('pre' == str && this.currentPage > 1) {
+        this.currentPage--;
+        this.toTop()
+      }
+      if('next' == str && this.currentPage < this.totalPage) {
+        this.currentPage++;
+        this.toTop()
+      }
+      if('last' == str) {
+        this.currentPage = this.totalPage
+        this.toTop()
+      }
+    },
+    toTop() {
+      document.getElementById("container").scrollTop = 0;
+    }
   }
 }
 </script>
@@ -32,6 +76,17 @@ export default {
   width: 100%;
   height: 100%;
   text-align: center;
+  overflow: auto;
 
+  .buttons {
+    position: fixed;
+    top: .2rem; right: .2rem;
+    & > p {
+      margin-bottom: .1rem;
+    }
+  }
+  .progress {
+    margin-top: .2rem;
+  }
 }
 </style>
