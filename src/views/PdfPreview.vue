@@ -6,7 +6,8 @@
       <p><el-button @click="changePdfPage('pre')" round icon="el-icon-arrow-up"></el-button></p>
       <p><el-button @click="changePdfPage('next')" round icon="el-icon-arrow-down"></el-button></p>
       <p><el-button @click="changePdfPage('last')" round icon="el-icon-caret-bottom"></el-button></p>
-      <p>
+      <p style="max-width: 100px;">
+        vue-pdf官网：https://github.com/FranckFreiburger/vue-pdf#readme
       </p>
     </div>
     <pdf :src="src" v-show="loadedRatio==1" style="width: 50%;margin: auto;border: 1px solid grey;"

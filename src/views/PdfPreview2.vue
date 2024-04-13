@@ -1,10 +1,12 @@
 <template>
   <div class="wrapper" id="container">
-    <pdf
+    <button @click="$refs.myPdfComponent.print()">print</button>
+    <pdf ref="myPdfComponent"
       v-for="i in numPages"
       :key="i"
       :src="src"
       :page="i"
+      @num-pages="totalPage=$event"
     ></pdf>
   </div>
 </template>
@@ -22,18 +24,20 @@ export default {
     return {
       src: loadingTask,
       numPages: undefined,
+      totalPage: 0,
     }
   },
   mounted() {
     this.src.promise.then(pdf => {
-
       this.numPages = pdf.numPages;
     });
   },
   computed: {
   },
   methods: {
-
+    error(e) {
+      console.log(e);
+    }
   }
 }
 </script>

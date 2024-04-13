@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Module from '@/views/Module'
 import PdfPreview from "../views/PdfPreview";
 import PdfPreview2 from "../views/PdfPreview2";
+import PdfDemo from "../views/PdfDemo.vue";
 
 Vue.use(Router)
 
@@ -34,6 +35,14 @@ const router = new Router({
       component: PdfPreview2,
       desc: 'vue-pdf预览pdf文件流2'
     },
+    {
+      path: '/PdfDemo',
+      name: "PdfDemo",
+      component: PdfDemo,
+      desc: 'PdfDemo预览pdf'
+    },
+
+
   ]
 });
 
