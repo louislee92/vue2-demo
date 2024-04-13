@@ -6,6 +6,8 @@
       <p><el-button @click="changePdfPage('pre')" round icon="el-icon-arrow-up"></el-button></p>
       <p><el-button @click="changePdfPage('next')" round icon="el-icon-arrow-down"></el-button></p>
       <p><el-button @click="changePdfPage('last')" round icon="el-icon-caret-bottom"></el-button></p>
+      <p>
+      </p>
     </div>
     <pdf :src="src" v-show="loadedRatio==1" style="width: 50%;margin: auto;border: 1px solid grey;"
          :page="currentPage"
@@ -31,7 +33,7 @@ export default {
   components: {pdf},
   data() {
     return {
-      src: "http://xstx.fun/vue-module/src/assets/file/Java-Top10.pdf",
+      src: "/static/Java-Top10.pdf",
       currentPage: 1,
       totalPage: 0,
       loadedRatio: 0,

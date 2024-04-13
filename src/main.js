@@ -16,10 +16,6 @@ Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 
-Vue.prototype.$ = $
-Vue.prototype.$api = api;
-Vue.prototype.$bus = bus;
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

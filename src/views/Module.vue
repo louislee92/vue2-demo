@@ -1,6 +1,5 @@
 <template>
   <div class="wrapper" :class="theme">
-
     <div class="state-wrapper">
       <div class="state-user">
         <p style="background: orange; padding: .1rem;">用户信息模块：store/user.js</p>

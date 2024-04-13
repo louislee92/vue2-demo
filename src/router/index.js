@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/views/Home'
 import Module from '@/views/Module'
 import PdfPreview from "../views/PdfPreview";
+import PdfPreview2 from "../views/PdfPreview2";
 
 Vue.use(Router)
 
@@ -17,12 +17,6 @@ const router = new Router({
   base: '/',
   routes: [
     {
-      path: '/',
-      name: "Home",
-      component: Home,
-      desc: '首页导航'
-    },
-    {
       path: '/module',
       name: "Module",
       component: Module,
@@ -33,6 +27,12 @@ const router = new Router({
       name: "PdfPreview",
       component: PdfPreview,
       desc: 'vue-pdf预览pdf文件流'
+    },
+    {
+      path: '/pdf-preview2',
+      name: "PdfPreview2",
+      component: PdfPreview2,
+      desc: 'vue-pdf预览pdf文件流2'
     },
   ]
 });
