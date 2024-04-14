@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="state-room">
-        <img :src="curPhotoSrc">
+        <img v-lazy="curPhotoSrc">
       </div>
     </div>
     <div class="button-wrapper">
