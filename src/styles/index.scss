@@ -39,6 +39,11 @@ a {
   justify-content: space-between;
 }
 
+@font-face{
+  font-family: "PingFang SC";
+  src: url("~@/assets/font-pingfangsc/PingFang Regular.ttf");
+}
+
 .fixed {
   position: fixed; left: 0; top: 0;
 }

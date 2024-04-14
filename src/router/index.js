@@ -4,6 +4,7 @@ import Module from '@/views/Module'
 import PdfPreview from "../views/PdfPreview";
 import PdfPreview2 from "../views/PdfPreview2";
 import PdfDemo from "../views/PdfDemo.vue";
+import FontFamily from "../views/FontFamily.vue";
 
 Vue.use(Router)
 
@@ -41,6 +42,13 @@ const router = new Router({
       component: PdfDemo,
       desc: 'PdfDemo预览pdf'
     },
+    {
+      path: '/FontFamily',
+      name: "FontFamily",
+      component: FontFamily,
+      desc: '常用字体预览'
+    },
+
 
 
   ]

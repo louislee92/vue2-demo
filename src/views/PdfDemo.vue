@@ -92,7 +92,7 @@ export default {
 
 <style lang="scss">
 .pdf-box-wrapper {
-  width: 80%; margin: auto;
+  width: 60%; margin: auto;
   .pdf-box {
     margin-top: .1rem;
     box-shadow: 0 0 20px black;
