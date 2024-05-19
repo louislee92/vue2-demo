@@ -15,7 +15,7 @@ const errorimage = require('./assets/404.jpg')
 
 Vue.use(VueLazyload, {
   preLoad: 1.3,
-  error: errorimage,
+  // error: errorimage,
   loading: loadimage,
   attempt: 1
 })

@@ -1,10 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Module from '@/views/Module'
-import PdfPreview from "../views/PdfPreview";
-import PdfPreview2 from "../views/PdfPreview2";
-import PdfDemo from "../views/PdfDemo.vue";
-import FontFamily from "../views/FontFamily.vue";
+import RouterConf from "./RouterConf";
 
 Vue.use(Router)
 
@@ -18,39 +14,10 @@ const router = new Router({
   // mode: 'history',
   base: '/',
   routes: [
-    {
-      path: '/module',
-      name: "Module",
-      component: Module,
-      desc: 'Vuex模块化，Vuex-persistencestate持久化，secure-ls加密处理'
-    },
-    {
-      path: '/pdf-preview',
-      name: "PdfPreview",
-      component: PdfPreview,
-      desc: 'vue-pdf预览pdf文件流'
-    },
-    {
-      path: '/pdf-preview2',
-      name: "PdfPreview2",
-      component: PdfPreview2,
-      desc: 'vue-pdf预览pdf文件流2'
-    },
-    {
-      path: '/PdfDemo',
-      name: "PdfDemo",
-      component: PdfDemo,
-      desc: 'PdfDemo预览pdf'
-    },
-    {
-      path: '/FontFamily',
-      name: "FontFamily",
-      component: FontFamily,
-      desc: '常用字体预览'
-    },
-
-
-
+    {path: '/', component: () => import('../views/Index.vue'),
+      redirect:'/home',
+      children: [{path: '/error',  component: () => import('../views/Error.vue')}].concat(RouterConf.router)},
+    {path: '*', redirect:'/error'},
   ]
 });
 
