@@ -2,7 +2,6 @@
   <div class="view-demo-drag">
     <div class="drag-list">
       <div class="list-item" v-for="it in list" draggable="true"
-           @mousedown="handleMousedown($event, it)"
            @dragstart="handleOndragstart($event, it)"
            @dragend="handleOndragend($event, it)"><i :class="it"></i></div>
     </div>
@@ -25,18 +24,22 @@ export default {
     }
   },
   methods: {
-    handleMousedown(e, it) {
-      console.log(e, it)
+    handleOndragstart(e, it) {
+      console.log('start', e)
       this.offsetX = e.offsetX
       this.offsetY = e.offsetY
     },
-    handleOndragstart(e, it) {
-      console.log('start', e)
-    },
     handleOndragend(e, it) {
       console.log(e, it);
+
+      function remToPx(rem) {
+        return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
+      }
+
+      let left = remToPx(2);
+
       let newList = JSON.parse(JSON.stringify(this.list2));
-      let x = e.x - 200 - this.offsetX;
+      let x = e.x - left - this.offsetX;
       let y = e.y - this.offsetY;
       newList.push({
         left: x, top: y, icon: it
