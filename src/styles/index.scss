@@ -12,9 +12,11 @@ body {
   font-size: .2rem;
 }
 a {
-  text-decoration: none;
   color: inherit;
   cursor: pointer;
+  &:hover {
+    color: #0a84ff;
+  }
 }
 
 .flex {
@@ -55,6 +57,7 @@ img[lazy="loading"]{
   position: fixed; left: 0; top: 0;
 }
 
+// 滚动条样式
 ::-webkit-scrollbar {
   width: .1rem;
 }
@@ -97,7 +100,6 @@ img[lazy="loading"]{
     font-size: 100px;
   }
 }
-@import "const";    // 常量
 @import "elem";     // 自定义element ui样式
 @import "viewer";
 

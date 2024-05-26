@@ -1,5 +1,6 @@
 <template>
   <div class="view-demo-vuex-module">
+    <p style="margin-bottom: .3rem;">文件地址：<a target="_blank" :href="url">{{url}}</a></p>
     <div class="markdown" v-html="html"></div>
   </div>
 </template>
@@ -11,6 +12,7 @@ import 'highlight.js/styles/obsidian.css'
 export default {
   data()  {
     return{
+      url: '/static/docs/vuex-module.md',
       html: '',
     }
   },
@@ -20,7 +22,7 @@ export default {
 
     // 配置HTTP请求
     // 这里的URL是你想要获取文本数据的地址
-    xhr.open('GET', '/static/docs/vuex-module.md', true);
+    xhr.open('GET', this.url, true);
 
     // 设置请求完成的处理函数
     xhr.onreadystatechange = () => {
@@ -58,7 +60,10 @@ export default {
 
 
 <style lang="scss" scoped>
-.markdown {
+.view-demo-vuex-module {
   padding: .3rem;
+  .markdown {
+
+  }
 }
 </style>
