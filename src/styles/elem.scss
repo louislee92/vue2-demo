@@ -1,0 +1,9 @@
+
+
+.el-input__inner {
+  background-color: transparent;
+  border: 1px solid transparent;
+  &:hover, &:focus {
+    border: 1px solid transparent;
+  }
+}

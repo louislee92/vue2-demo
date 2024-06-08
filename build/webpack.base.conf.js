@@ -34,10 +34,17 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
+    }),
+    new webpack.ProvidePlugin({
+      mapboxgl: 'mapbox-gl'
     })
   ],
   module: {
     rules: [
+      {
+        test: /\bmapbox-gl-csp-worker.js\b/i,
+        use: { loader: 'worker-loader' }
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -46,7 +53,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')],
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
