@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div id="map" style="width: 100%; height: 100vh;"></div>
     <div class="btn">
-      <el-button @click="area">区域着色</el-button>
+      <el-button @click="area">点位可拖动</el-button>
       <el-button @click="popup">popUp弹框</el-button>
       <el-button @click="addpoint">撒点</el-button>
     </div>

@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist", // 输出文件夹
+    "sourceMap": true, // 启用source map，便于调试
+    // 其他根据需要配置的选项
+  },
+//  "include": [
+//    "./src/**/*" // 包含src目录下所有文件
+//  ]
+}

@@ -7,6 +7,7 @@ export default {
     {path: '/demo-pdf-viewer', label: 'PDF官方预览', component: () => import('../views/DemoPdfViewer.vue')},
     {path: '/demo-drag', label: '拖拽示例', component: () => import('../views/DemoDrag.vue')},
     {path: '/demo-ctp-form', label: '表单组件', component: () => import('../views/DemoCtpForm.vue')},
-    {path: '/demo-maxbox', label: 'Mapbbox', component: () => import('../views/DemoMapbox.vue')}
+    {path: '/demo-maxbox', label: 'Mapbbox', component: () => import('../views/DemoMapbox.vue')},
+    {path: '/demo-antv-x6', label: 'AntvX6', component: () => import('../views/DemoX6.vue')}
   ]
 }

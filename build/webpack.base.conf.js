@@ -24,7 +24,7 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.ts', '.tsx'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
@@ -35,16 +35,9 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery'
     }),
-    new webpack.ProvidePlugin({
-      mapboxgl: 'mapbox-gl'
-    })
   ],
   module: {
     rules: [
-      {
-        test: /\bmapbox-gl-csp-worker.js\b/i,
-        use: { loader: 'worker-loader' }
-      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -54,6 +47,11 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')],
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
