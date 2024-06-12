@@ -12,6 +12,8 @@ const fillOpacity = 0.1;      // 区域透明度
 // 边界点样式
 const polygonMidPointsColor = 'red';
 const polygonMidPointsWidth = 5;
+const polygonMidPointsInactiveColor = 'blue';
+const polygonMidPointsInactiveWidth = 5;
 
 
 export default [
@@ -68,6 +70,16 @@ export default [
     'paint': {
       'circle-radius': polygonMidPointsWidth,
       'circle-color': polygonMidPointsColor
+    }
+  },
+  // polygon mid points
+  {
+    'id': 'gl-draw-polygon-midpoint-inactive',
+    'type': 'circle',
+    'filter': ['all', ['==', '$type', 'Point'], ['==', 'meta', 'midpoint'],["!=", "mode", "static"]],
+    'paint': {
+      'circle-radius': polygonMidPointsInactiveWidth,
+      'circle-color': polygonMidPointsInactiveColor
     }
   },
   // polygon outline stroke

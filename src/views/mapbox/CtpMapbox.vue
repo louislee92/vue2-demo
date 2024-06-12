@@ -6,10 +6,6 @@
     <!--      <el-button @click="popup">popUp弹框</el-button>-->
     <!--      <el-button @click="addpoint">撒点</el-button>-->
     <!--    </div>-->
-    <div class="calculation-box">
-      <p>Click the map to draw a polygon.</p>
-      <div id="calculated-area"></div>
-    </div>
   </div>
 </template>
 
@@ -133,9 +129,10 @@ export default {
         if(config.maxzoom < this.map.getZoom()) this.map.setZoom(config.maxzoom);
       });
       // 地图加载完成事件
-      this.map.on('load', () => {
+      this.map.on('style.load', () => {
         if(callback) callback(this.map)
       });
+      // 去除logo
       this.map._logoControl &&  this.map.removeControl( this.map._logoControl);
     },
     // 移动地图，设置缩放
@@ -150,7 +147,142 @@ export default {
       }
       this.jumpTo(config);
     },
-    // 添加
+    // 添加撒点图层
+    addPointLayer(layerId, points, onclick) {
+      this.removeLayer(layerId);
+      let features = [];
+      points.forEach(s => {
+        features.push({
+          'type': 'Feature',
+          'geometry': {
+            'type': 'Point',
+            'coordinates': s.coordinates
+          }
+        })
+      })
+      let sourceId = layerId + '-source';
+      this.setSource(sourceId, {
+        'type': 'geojson',
+        'data': {
+          'type': 'FeatureCollection',
+          'features': features
+        }
+      });
+      this.map.addLayer({
+        'id': layerId,
+        'type': 'circle',
+        'source': sourceId,
+        'paint': {
+          'circle-radius': 6,
+          'circle-color': '#B42222'
+        },
+        'filter': ['==', '$type', 'Point']
+      });
+      if(onclick) this.map.on('click', layerId, onclick);
+
+      return layerId;
+    },
+    // 添加轨迹播放图层
+    addTraceLayer(layerId, points) {
+      this.removeLayer(layerId);
+      let coordinates = points;
+      let data = {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            'type': 'Feature',
+            'geometry': {
+              'type': 'LineString',
+              'coordinates': coordinates
+            }
+          }
+        ]
+      }
+
+      let sourceId = layerId + '-source';
+      // add it to the map
+      this.setSource(sourceId, { type: 'geojson', data: data });
+
+      let layerId2 = layerId + '2';
+      this.map.addLayer({
+        id: layerId2,
+        type: 'line',
+        source: sourceId,
+        paint: {
+          'line-color': '#ed6498',
+          'line-width': 6,
+          'line-dasharray': [0, 4, 3],
+          'line-opacity': 0.9,
+        }
+      });
+
+      this.map.addLayer({
+        'id': layerId,
+        'type': 'line',
+        'source': sourceId,
+        'paint': {
+          'line-color': '#ed6498',
+          'line-opacity': 0.3,
+          'line-width': 6
+        }
+      });
+
+      const dashArraySequence = [
+        [0, 4, 3],
+        [0.5, 4, 2.5],
+        [1, 4, 2],
+        [1.5, 4, 1.5],
+        [2, 4, 1],
+        [2.5, 4, 0.5],
+        [3, 4, 0],
+        [0, 0.5, 3, 3.5],
+        [0, 1, 3, 3],
+        [0, 1.5, 3, 2.5],
+        [0, 2, 3, 2],
+        [0, 2.5, 3, 1.5],
+        [0, 3, 3, 1],
+        [0, 3.5, 3, 0.5]
+      ];
+      let step = 0;
+
+      let map = this.map;
+      function animateDashArray(timestamp) {
+        // Update line-dasharray using the next value in dashArraySequence. The
+        // divisor in the expression `timestamp / 50` controls the animation speed.
+        const newStep = parseInt(
+          (timestamp / 50) % dashArraySequence.length
+        );
+
+        if (newStep !== step) {
+          map.setPaintProperty(
+            layerId2,
+            'line-dasharray',
+            dashArraySequence[step]
+          );
+          step = newStep;
+        }
+
+        // Request the next frame of the animation.
+        requestAnimationFrame(animateDashArray);
+      }
+
+      // start the animation
+      animateDashArray(0);
+
+    },
+    // 设置source
+    setSource(sourceId, data) {
+      let sourceObj = this.map.getSource(sourceId);
+      if(sourceObj != undefined && sourceObj != null) {
+        this.removeSource(sourceId);
+      }
+      this.map.addSource(sourceId, data);
+    },
+    // 删除图层
+    removeLayer(layerId) {
+      if(this.map.getLayer(layerId)) this.map.removeLayer(layerId);
+    },
+
     // 区域着色
     area() {
       let map = this.map;

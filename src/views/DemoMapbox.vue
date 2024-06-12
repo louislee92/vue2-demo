@@ -13,61 +13,38 @@ export default {
   },
   mounted() {
     this.$refs.CtpMapboxRef.initMap({}, (map) => {
-      console.log('轨迹播放', map)
-      // 添加GeoJSON源
-      map.addSource('trace', {
-        'type': 'geojson',
-        'data': {
-          'type': 'Feature',
-          'properties': {},
-          'geometry': {
-            'type': 'LineString',
-            'coordinates': [
-              [118.76, 32.02], // 初始坐标
-              [118.84, 32.32],
-              [118.92, 32.22],
-              [118.81, 32.12],
-              [118.76, 32.02] // 结束坐标
-            ]
-          }
-        }
-      });
 
-      // 添加轨迹图层
-      map.addLayer({
-        'id': 'trace-layer',
-        'type': 'line',
-        'source': 'trace',
-        'layout': {
-          'line-join': 'round',
-          'line-cap': 'round'
-        },
-        'paint': {
-          'line-color': '#3887ff',
-          'line-width': 5
-        }
-      });
-      // 初始化当前索引
-      var index = 0;
+      // 撒点并弹框
+      let points = [
+        { coordinates: [118.76, 32.02], },
+        { coordinates: [118.86, 32.12], },
+        { coordinates: [118.96, 32.12], },
+        { coordinates: [118.78, 32.04], },
+      ]
+      this.$refs.CtpMapboxRef.addPointLayer('testLayer', points, e => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const mag = e.features[0].properties.mag;
+        const tsunami = e.features[0].properties.tsunami === 1 ? 'yes' : 'no';
+        new mapboxgl.Popup()
+          .setLngLat(coordinates)
+          .setHTML(
+            `magnitude: ${mag}<br>Was there a tsunami?: ${tsunami}`
+          )
+          .addTo(map);
+      })
 
-      // 播放轨迹的函数
-      function playTrace() {
-        if (index < 10) { // 假设有10个坐标点
-          map.getSource('trace').setData({
-            'type': 'LineString',
-            'coordinates': [
-              // ...其他坐标点
-              [index, index] // 当前索引对应的坐标点
-            ]
-          });
-          console.log("播放：", index);
-          index++;
-          setTimeout(playTrace, 100); // 每100毫秒更新一次
-        }
-      }
+      // 绘制多边形  draw
 
-      // 开始播放
-      playTrace();
+      // 轨迹播放
+      this.$refs.CtpMapboxRef.addTraceLayer('testLayer2', [
+        [118.76, 32.02],
+        [118.86, 32.12],
+        [118.96, 32.12],
+        [118.78, 32.04],
+      ])
+
+      // 删除图层
+      // this.$refs.CtpMapboxRef.removeLayer('testLayer');
     });
   },
 };
