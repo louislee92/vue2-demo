@@ -8,6 +8,9 @@ export default {
     {path: '/demo-drag', label: '拖拽示例', component: () => import('../views/DemoDrag.vue')},
     {path: '/demo-ctp-form', label: '表单组件', component: () => import('../views/DemoCtpForm.vue')},
     {path: '/demo-maxbox', label: 'Mapbbox', component: () => import('../views/DemoMapbox.vue')},
-    {path: '/demo-antv-x6', label: 'AntvX6', component: () => import('../views/DemoX6.vue')}
+    {path: '/demo-antv-x6', label: 'AntvX6', component: () => import('../views/DemoX6.vue')},
+    {path: '/demo-svg', label: 'SVG动画', component: () => import('../views/DemoSvg.vue')},
+    {path: '/demo-el-table', label: 'ElTable', component: () => import('../views/DemoElTable.vue')},
+
   ]
 }

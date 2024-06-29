@@ -126,6 +126,30 @@ export default {
 }
 </script>
 
-<style lang="scss">
-@import "./view-ctp-form";
+<style lang="scss" scoped>
+.view-ctp-form {
+
+  .el-form-item {
+    margin-bottom: .2rem;
+  }
+
+  .edit-btn-wrapper {
+    //position: absolute;
+    //top: 0; right: 0;
+    height: 100%;
+    display: none;
+    align-items: center;
+    .edit-btn {
+      color: white;
+      margin-right: .1rem;
+      &:hover {
+        color: lime;
+      }
+    }
+  }
+  .normal-mode .el-form-item__content:hover .edit-btn-wrapper {
+    display: inline-block;
+  }
+}
+
 </style>
