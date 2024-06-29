@@ -29,6 +29,28 @@
                        begin="0s" dur="3s" rotate="auto" repeatCount="indefinite"/>
       </circle>
     </svg>
+    <h1>svg心跳</h1>
+    <svg style="width: 100%; height: 100px;">
+      <defs>
+        <radialGradient id="grad1" cx="0.5" cy="0.5" r="0.5" fx="0.5" fy="0.5">
+          <stop offset="0%" style="stop-color:rgba(0,255,0, 0.8); stop-opacity:1" />
+          <stop offset="100%" style="stop-color:rgba(0,255,0, 0); stop-opacity:1" />
+        </radialGradient>
+      </defs>
+
+      <path class="w1" d="
+      M0 70 L100 70 S110 50,120 70 Q130 70,140 70 L150 80 L160 0 L170 100 L180 70 L200 70 S220 30,240 70 L260 70
+      M260 70 L360 70 S370 50,380 70 Q390 70,400 70 L410 80 L420 0 L430 100 L440 70 L460 70 S480 30,500 70 L820 70
+" fill="none" stroke="white" opacity=".1"/>
+      <circle r="7" fill="url(#grad1)">
+        <!-- rotate="auto" 会让运行轨迹 有方向 -->
+        <animateMotion path="
+      M0 70 L100 70 S110 50,120 70 Q130 70,140 70 L150 80 L160 0 L170 100 L180 70 L200 70 S220 30,240 70 L260 70
+      M260 70 L360 70 S370 50,380 70 Q390 70,400 70 L410 80 L420 0 L430 100 L440 70 L460 70 S480 30,500 70 L820 70
+"
+                       begin="0s" dur="6s" rotate="auto" repeatCount="indefinite"/>
+      </circle>
+    </svg>
 
   </div>
 </template>
@@ -53,6 +75,10 @@ svg {
     stroke-dashoffset: 1300px;
     animation: run 2s linear forwards;
   }
+
+}
+.w1 {
+  stroke-width: 2px;
 }
 @keyframes run{
   0%{
