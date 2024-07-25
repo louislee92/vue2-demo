@@ -21,11 +21,11 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
     proxyTable: {
-      '/api': {
-        target: 'https://sex.nyan.xyz/',
+      '/ctp': {
+        target: 'http://localhost:8080',
         changeOrigin: true,
         secure: false,
-        ws: true
+        ws: true,
       }
     },
 

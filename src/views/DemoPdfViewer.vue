@@ -6,7 +6,12 @@
 <script>
 export default {
   props: {
-    src: {type: String, default: '/static/pdfjs-3.1.81-dist/web/viewer.html?file=http://localhost:8081/static/Java-Top10.pdf'},
+    url: {type: String, default: '/ctp/test/pdf'},
+  },
+  computed: {
+    src() {
+      return '/static/pdfjs-3.1.81-dist/web/viewer-chrome.html?file=' + this.url;
+    }
   }
 }
 </script>

@@ -1,0 +1,62 @@
+
+#toolbarSidebar {display: none;}
+#sidebarContent {top: 0;}
+
+#toolbarViewer {
+  height: 56px;
+  background-color: rgb(50, 54, 57);
+  align-items: center;
+  display: flex;
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+.flex-grow-1 {flex-grow: 1;}
+
+#sidebarToggle {
+  width: 32px;
+  height: 32px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+#sidebarToggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+#sidebarToggle::before {display: none;}
+#sidebarToggle .svg-wrapper {
+  display: inline-block;
+  height: 100%; width: 20px;
+}
+#sidebarToggle .svg-wrapper svg {
+  fill: rgb(241, 241, 241);
+  height: 100%;
+}
+
+.toolbarButtonSpacer,
+#viewFind, .hiddenSmallView
+{display: none;}
+
+#viewerContainer { top: 56px; }
+#sidebarContent {top: 24px;}
+#pageNumber {
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  font-size: 12px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#toolbarViewerMiddle {display: flex; align-items: center; justify-content: center}
+
+#toolbarViewerLeft {
+  display: flex;
+  align-items: center;
+  color: rgb(241, 241, 241);
+}
+#toolbarViewerLeft text { margin-left: 10px; }
+
+#openFile,#editorFreeText,#editorInk,#editorModeSeparator {display: none;}
