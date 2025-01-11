@@ -11,8 +11,9 @@
 
 <script>
 import { Graph } from '@antv/x6'
+import { register, getTeleport } from '@antv/x6-vue-shape'
+import Node1 from './antv-x6/Node1.vue'
 export default {
-
   data() {
 
     return {
@@ -21,7 +22,7 @@ export default {
     }
   },
   mounted() {
-    const graph = new Graph({
+    this.graph = new Graph({
       container: document.getElementById('container'),
       width: 800,
       height: 600,
@@ -30,146 +31,56 @@ export default {
       },
     })
 
-    const data = {
-      nodes: [],
-      edges: [],
-    }
-    graph.fromJSON(data) // 渲染元素
+    // 将节点添加到画布上
+    // graph.fromJSON(data) // 渲染元素
     // graph.centerContent() // 居中显示
-    this.graph  =graph;
 
-    function remToPx(rem) {
-      return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
-    }
-    // 注册节点
-    let w = remToPx(.8);
-    Graph.registerNode(
-      'custom-node',
-      {
-        width: w,
-        height: w,
-        // 属性样式
-        attrs: {
-          body: {
-            stroke: '#5F95FF',
-            strokeWidth: 1,
-            fill: 'rgba(95,149,255,0.05)',
-            refWidth: 1,
-            refHeight: 1,
-          },
-          image: {
-            'xlink:href': 'https://gw.alipayobjects.com/zos/antfincdn/FLrTNDvlna/antv.png',
-            width: 16,
-            height: 16,
-            x: 12,
-            y: 12,
-          },
-          title: {
-            text: 'Node',
-            refX: 40,
-            refY: 14,
-            fill: 'rgba(0,0,0,0.85)',
-            fontSize: 12,
-            'text-anchor': 'start',
-          },
-          text: {
-            text: 'this is content text',
-            refX: 12,
-            refY: 38,
-            fontSize: 12,
-            class: 'el-icon-search',
-            fill: 'rgba(0,0,0,0.6)',
-            'text-anchor': 'start',
-          },
-        },
-        // 配置属性
-        markup: [
-          {
-            tagName: 'rect',
-            selector: 'body',
-          },
-          {
-            tagName: 'image',
-            selector: 'image',
-          },
-          {
-            tagName: 'text',
-            selector: 'title',
-          },
-          {
-            tagName: 'text',
-            selector: 'text',
-          },
-        ],
-        // 连接桩
-        ports: {
-          groups: {
-            group1: {
-              attrs: {
-                circle: {
-                  r: 6,
-                  magnet: true,
-                  stroke: '#31d0c6',
-                  strokeWidth: 2,
-                  fill: '#fff',
-                },
-                text: {
-                  fontSize: 12,
-                  fill: '#888',
-                },
-              },
-              // 文档：https://x6.antv.vision/zh/docs/api/registry/port-layout#left-right-top-bottom
-              position: {
-                name: 'right',
-              },
-            },
-          },
-          items: [
-            {
-              id: 'port1',
-              group: 'group1',
-            },
-            {
-              id: 'port3',
-              group: 'group1',
-            },
-          ],
-        },
-      },
-      true,
-    )
+    // 注册自定义节点
+    register({
+      shape: 'custom-vue-node',
+      x: 200,
+      y: 100,
+      width: 100,
+      height: 50,
+      component: Node1
+    })
+
   },
   methods: {
 
+    // 拖拽开始
     handleOndragstart(e, it) {
       console.log('start', e)
       this.offsetX = e.offsetX
       this.offsetY = e.offsetY
     },
+    // 拖拽结束
     handleOndragend(e, it) {
       console.log(e, it);
 
-      function remToPx(rem) {
-        return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
-      }
 
-      let left = remToPx(3);
-      let w = remToPx(.8);
+      let left = 300;
 
       let x = e.x - left - this.offsetX;
       let y = e.y - this.offsetY;
-      let obj = {
-        left: x, top: y, icon: it
-      }
-      let graph = this.graph;
-      const node  = graph.addNode({
-        shape: 'custom-node',
-        x: x,
-        y: y,
-      })
-      node.attr('text/text', it)
 
-      console.log('obj', obj)
+
+
+      this.graph.addNode({
+        id: "" + Math.random(),
+        shape: 'custom-vue-node', // 指定使用何种图形，默认值为 'rect'
+        x: x, y: y,
+        width: 60,
+        height: 60
+      })
+
+      // let graph = this.graph;
+      // const node  = graph.addNode({
+      //   shape: 'custom-node',
+      //   x: x, y: y,
+      // })
+      // node.attr('title/text', it)
+
     }
   }
 }
