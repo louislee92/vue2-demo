@@ -45,6 +45,25 @@ export default {
       component: Node1
     })
 
+    const graph = this.graph;
+    // graph.on('cell:click', ({ e, x, y, cell, view }) => {
+    //   console.log('cell:click', e,x,y, cell, view)
+    // })
+    graph.on('node:click', ({ e, x, y, node, view }) => {
+      console.log('node:click', e,x,y, node, view)
+    })
+    graph.on('edge:click', ({ e, x, y, edge, view }) => {
+      console.log('edge:click', e,x,y, edge, view)
+    })
+    graph.on('blank:click', ({ e, x, y }) => {
+      console.log('blank:click', e,x,y)
+    })
+
+    graph.on('cell:mouseenter', ({ e, cell, view }) => { })
+    graph.on('node:mouseenter', ({ e, node, view }) => { })
+    graph.on('edge:mouseenter', ({ e, edge, view }) => { })
+    graph.on('graph:mouseenter', ({ e }) => { })
+
   },
   methods: {
 
